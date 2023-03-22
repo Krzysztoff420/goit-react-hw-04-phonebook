@@ -1,18 +1,12 @@
-import { Component } from 'react';
 import css from './ContactListItem.module.css';
 import PropTypes from 'prop-types';
 
-export class ContactListItem extends Component {
-  handleDelete = evt => {
-    const { onDelete } = this.props;
+export const ContactListItem = ({ onDelete, myFilteredContacts }) => {
+  const handleDelete = evt => {
     const contactId = evt.target.id;
 
     onDelete(contactId);
   };
-
-  render() {
-    const { myFilteredContacts } = this.props;
-
     return (
       <div>
         {myFilteredContacts.map(({ name, number, id }) => (
@@ -21,7 +15,7 @@ export class ContactListItem extends Component {
             <button
               id={id}
               className={css.deleteButton}
-              onClick={this.handleDelete}
+              onClick={handleDelete}
             >
               Delete
             </button>
@@ -30,7 +24,7 @@ export class ContactListItem extends Component {
       </div>
     );
   }
-}
+
 
 ContactListItem.propTypes = {
   myFilteredContacts: PropTypes.arrayOf(
